@@ -1,0 +1,9 @@
+INSERT INTO price (id, currency, price) VALUES (1, 'USD', 10000);
+INSERT INTO price (id, currency, price) VALUES (2, 'INR', 900000);
+INSERT INTO price (id, currency, price) VALUES (3, 'USD', 21800);
+INSERT INTO price (id, currency, price) VALUES (4, 'INR', 1000000);
+INSERT INTO price (id, currency, price) VALUES (5, 'EUR', 29999);
+INSERT INTO price (id, currency, price) VALUES (6, 'DZD', 10000);
+INSERT INTO price (id, currency, price) VALUES (7, 'FJD', 10000);
+INSERT INTO price (id, currency, price) VALUES (8, 'DKK', 24689);
+INSERT INTO price (id, currency, price) VALUES (9, 'CZK', 10000);
