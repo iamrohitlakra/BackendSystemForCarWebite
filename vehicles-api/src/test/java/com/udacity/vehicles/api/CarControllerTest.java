@@ -30,8 +30,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Implements testing of the CarController class.
@@ -99,11 +98,23 @@ public class CarControllerTest {
          *   the whole list of vehicles. This should utilize the car from `getCar()`
          *   below (the vehicle will be the first in the list).
          */
-
+        Car car = getCar();
         mvc.perform(get("/cars"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/hal+json;charset=UTF-8"))
-                .andExpect(content().json("{}"));
+                .andExpect(content().json("{}"))
+                .andExpect(jsonPath("$._embedded.carList.[0].condition").value(car.getCondition().name()))
+                .andExpect(jsonPath("$._embedded.carList.[0].details.body").value(car.getDetails().getBody()))
+                .andExpect(jsonPath("$._embedded.carList.[0].details.model").value(car.getDetails().getModel()))
+                .andExpect(jsonPath("$._embedded.carList.[0].details.manufacturer.code").value(car.getDetails().getManufacturer().getCode()))
+                .andExpect(jsonPath("$._embedded.carList.[0].details.manufacturer.name").value(car.getDetails().getManufacturer().getName()))
+                .andExpect(jsonPath("$._embedded.carList.[0].details.numberOfDoors").value(car.getDetails().getNumberOfDoors()))
+                .andExpect(jsonPath("$._embedded.carList.[0].details.fuelType").value(car.getDetails().getFuelType()))
+                .andExpect(jsonPath("$._embedded.carList.[0].details.engine").value(car.getDetails().getEngine()))
+                .andExpect(jsonPath("$._embedded.carList.[0].details.mileage").value(car.getDetails().getMileage()))
+                .andExpect(jsonPath("$._embedded.carList.[0].details.modelYear").value(car.getDetails().getModelYear()))
+                .andExpect(jsonPath("$._embedded.carList.[0].details.productionYear").value(car.getDetails().getProductionYear()))
+                .andExpect(jsonPath("$._embedded.carList.[0].details.externalColor").value(car.getDetails().getExternalColor()));
         verify(carService, times(1)).list();
 
     }
